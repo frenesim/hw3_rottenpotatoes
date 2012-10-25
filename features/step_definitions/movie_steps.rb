@@ -6,6 +6,7 @@ Given /the following movies exist/ do |movies_table|
     # you should arrange to add that movie to the database here.
     Movie.create!(movie)
   end
+  @movie_rows = Movie.count
   #flunk "Unimplemented"
 end
 
@@ -33,25 +34,14 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   rating_list.split(',').each do |rating|
     uncheck ? uncheck("ratings_"+rating) : check("ratings_"+rating) 
   end
-  
 end
 
-Then /^(?:|I )should see "([^"]*)" within "([^"]*)"?$/ do |text, selector|
-  with_scope(selector) do
-    if page.respond_to? :should
-      page.should have_content(text)
-    else
-      assert page.has_content?(text)
-    end
-   end
+When /I (un)?check all within (.*[^:]) / do |uncheck,checkboxs|
+  checkboxs.each do |checkbox|
+    uncheck ? uncheck(checkbox) : check(checkbox)
+  end 
 end
 
-Then /^(?:|I )should not see "([^"]*)" in tables$/ do |text|
-  text = "<td>"+text+"</td>"
-  if page.respond_to? :should
-    page.body.should have_no_content(text)
-  else
-    #assert page.has_no_content?(text)
-    page.body.has_no_content?(text)
-  end
+Then /I should see all movies/ do
+  @movie_rows < all("table#movies tr").count
 end

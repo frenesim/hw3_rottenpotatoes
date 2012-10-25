@@ -28,10 +28,12 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   Then I should see "PG" within movies
   	And I should see "R" within movies
   	And I should not see "PG-13" within movies
-  	#And I should not see "G" within movies
+  	And I should not see "G" within movies
 
 Scenario: no ratings selected
-  # see assignment
+  When I uncheck all within ratings_form
+  Then I should see all movies
 
 Scenario: all ratings selected
-  # see assignment
+  When I check all within ratings_form
+  Then I should see all movies

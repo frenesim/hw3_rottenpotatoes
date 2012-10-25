@@ -17,6 +17,8 @@ module HtmlSelectorsHelpers
       "html > body"
     when "movies"
       "table#movies"
+    when "ratings_form"
+      "form#ratings_form" 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
