@@ -30,5 +30,28 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   # HINT: use String#split to split up the rating_list, then
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
+  rating_list.split(',').each do |rating|
+    uncheck ? uncheck("ratings_"+rating) : check("ratings_"+rating) 
+  end
+  
 end
 
+Then /^(?:|I )should see "([^"]*)" within "([^"]*)"?$/ do |text, selector|
+  with_scope(selector) do
+    if page.respond_to? :should
+      page.should have_content(text)
+    else
+      assert page.has_content?(text)
+    end
+   end
+end
+
+Then /^(?:|I )should not see "([^"]*)" in tables$/ do |text|
+  text = "<td>"+text+"</td>"
+  if page.respond_to? :should
+    page.body.should have_no_content(text)
+  else
+    #assert page.has_no_content?(text)
+    page.body.has_no_content?(text)
+  end
+end

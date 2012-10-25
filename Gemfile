@@ -8,7 +8,10 @@ gem 'rails', '3.1.0'
 # for Heroku deployment - as described in Ap. A of ELLS book
 group :development, :test do
   gem 'sqlite3'
+  gem 'linecache19', '0.5.13', :path => "C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/linecache19-0.5.13/"
+  gem 'ruby-debug-base19', '0.11.26', :path => "C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/ruby-debug-base19-0.11.26/"
   gem 'ruby-debug19', :require => 'ruby-debug'
+
   gem 'database_cleaner'
   gem 'capybara'
   gem 'launchy'
@@ -24,7 +27,7 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'therubyracer'              
+  #gem 'therubyracer'              
   gem 'sass-rails', "  ~> 3.1.0"
   gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
