@@ -7,6 +7,7 @@ Given /the following movies exist/ do |movies_table|
     Movie.create!(movie)
   end
   @movie_rows = Movie.count
+  @all_ratings =Movie.select(:rating).map(&:rating).uniq
   #flunk "Unimplemented"
 end
 
@@ -36,7 +37,13 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   end
 end
 
-Then /I should see all movies/ do
+When /I (un)?check all/ do |uncheck|
+  @all_ratings.each do |rating|
+    uncheck ? uncheck("ratings_"+rating) : check("ratings_"+rating)
+  end
+end
+
+Then /I should see all of the movies/ do
   assert @movie_rows.should < all("table#movies tr").count
 end
 

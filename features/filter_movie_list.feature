@@ -31,9 +31,11 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   	And I should not see "G" within movies
 
 Scenario: no ratings selected
-  When I uncheck the following ratings: PG,R,PG-13,G
+  When I uncheck the following ratings: PG,R,PG-13,G,NC-17
+  #When I uncheck all
   Then I should see no changes in movies
 
 Scenario: all ratings selected
-  When I check the following ratings: PG,R,PG-13,G
-  Then I should see all movies
+  When I check the following ratings: PG,R,PG-13,G,NC-17
+  #When I check all
+  Then I should see all of the movies
