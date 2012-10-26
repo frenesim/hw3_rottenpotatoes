@@ -19,7 +19,7 @@ Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #page.content(e1)
   p1 = page.text =~ /#{Regexp.escape(e1)}/ 
   p2 = page.text =~ /#{Regexp.escape(e2)}/
-  p1 > p2
+  assert p1.should < p2
   #flunk "Unimplemented"
 end
 
@@ -43,5 +43,5 @@ When /I (un)?check all within (.*[^:]) / do |uncheck,checkboxs|
 end
 
 Then /I should see all movies/ do
-  @movie_rows.should < all("table#movies tr").count
+  assert @movie_rows.should < all("table#movies tr").count
 end
