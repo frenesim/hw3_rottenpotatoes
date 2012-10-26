@@ -32,16 +32,14 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
   rating_list.split(',').each do |rating|
-    uncheck ? uncheck("ratings_"+rating) : check("ratings_"+rating) 
+    uncheck ? uncheck("ratings_"+rating) : check("ratings_"+rating)
   end
-end
-
-When /I (un)?check all within (.*[^:]) / do |uncheck,checkboxs|
-  checkboxs.each do |checkbox|
-    uncheck ? uncheck(checkbox) : check(checkbox)
-  end 
 end
 
 Then /I should see all movies/ do
   assert @movie_rows.should < all("table#movies tr").count
+end
+
+Then /I should see no changes in movies/ do
+  assert all("table#movies tr").count > 1
 end
