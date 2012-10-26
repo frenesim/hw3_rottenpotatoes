@@ -23,7 +23,7 @@ Background: movies have been added to database
   
 Scenario: restrict to movies with 'PG' or 'R' ratings
   When I check the following ratings: PG,R
-    And I uncheck the following ratings: PG-13,G 
+    And I uncheck the following ratings: PG-13,G
   Then I press "ratings_submit"
   Then I should see "PG" within movies
   	And I should see "R" within movies
@@ -32,10 +32,8 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
 
 Scenario: no ratings selected
   When I uncheck the following ratings: PG,R,PG-13,G,NC-17
-  #When I uncheck all
   Then I should see no changes in movies
 
 Scenario: all ratings selected
   When I check the following ratings: PG,R,PG-13,G,NC-17
-  #When I check all
   Then I should see all of the movies
